@@ -18,6 +18,8 @@ panic = "abort"
 [dependencies]
 ansi_term = "0.12"
 anyhow = "1"
+async-std = { version = "1.9", default-features = false, features = ["attributes", "std", "unstable"] }
+async-process = "1"
 axum = { version = "0.2", features = ["ws"] }
 bytes = "1"
 cargo-lock = "6"

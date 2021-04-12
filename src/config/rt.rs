@@ -38,6 +38,8 @@ pub struct RtcBuild {
     /// Optional replacement parameters corresponding to the patterns provided in
     /// `pattern_script` and `pattern_preload`.
     pub pattern_params: Option<HashMap<String, String>>,
+    /// Output ESM Workers
+    pub module_workers: bool,
 }
 
 impl RtcBuild {
@@ -81,6 +83,7 @@ impl RtcBuild {
             pattern_script: opts.pattern_script,
             pattern_preload: opts.pattern_preload,
             pattern_params: opts.pattern_params,
+            module_workers: opts.module_workers.unwrap_or(false),
         })
     }
 }
