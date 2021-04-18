@@ -96,7 +96,7 @@ impl RustWorker {
     async fn build(mut self) -> Result<TrunkLinkPipelineOutput> {
         let (wasm, hashed_name) = self.cargo_build().await?;
         let output = self.wasm_bindgen_build(wasm.as_ref(), &hashed_name).await?;
-        self.wasm_opt_build(&output.wasm_output).await?;
+        wasm_opt_build(self.cfg, self.manifest, self.wasm_opt, &output.wasm_output).await?;
         Ok(TrunkLinkPipelineOutput::RustWorker(output))
     }
 
