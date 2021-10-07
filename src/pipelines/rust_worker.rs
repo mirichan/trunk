@@ -70,7 +70,11 @@ impl RustWorker {
         let cargo_features = attrs.get("data-cargo-features").map(|val| val.to_string());
         let keep_debug = attrs.contains_key("data-keep-debug");
         let no_demangle = attrs.contains_key("data-no-demangle");
-        let wasm_opt = attrs.get("data-wasm-opt").map(|val| val.parse()).transpose()?.unwrap_or_default();
+        let wasm_opt = attrs
+            .get("data-wasm-opt")
+            .map(|val| val.parse())
+            .transpose()?
+            .unwrap_or_default();
         let manifest = CargoMetadata::new(&manifest_href).await?;
 
         Ok(Self {
@@ -296,7 +300,7 @@ impl RustWorker {
             .await
             .context("error creating wasm-opt output dir")?;
 
-            // Build up args for calling wasm-opt.
+        // Build up args for calling wasm-opt.
         let output = output.join(hashed_name);
         let arg_output = format!("--output={}", output.display());
         let arg_opt_level = format!("-O{}", self.wasm_opt.as_ref());
